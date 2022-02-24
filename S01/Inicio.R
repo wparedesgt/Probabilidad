@@ -100,5 +100,25 @@ set.seed(1996, kind = NULL, normal.kind = NULL, sample.kind = NULL)
 
 #Con o sin reemplazo
 
+#La función "sample" tiene un argumento que nos permite elegir más de un elemento de la muestra. Sin embargo, por defecto, esta selección ocurre sin reemplazo: después de seleccionar una cuenta, no se vuelve a colocar. Observe lo que sucede cuando le pedimos que seleccione al azar cinco cuentas:
+
+
+sample(muestras, 5)
+sample(muestras, 5)
+sample(muestras, 5)
+
+#Esto da como resultado reordenamientos que siempre tienen tres cuentas azules y dos rojas. Si pedimos que se seleccionen seis cuentas, obtenemos un error:
+
+sample(muestras, 6)
+
+
+#Sin embargo, la función de "sample" se puede usar directamente, sin el uso de "replicate", para repetir el mismo experimento de escoger 1 de las 5 cuentas, continuamente, bajo las mismas condiciones. Para hacer esto, tomamos una muestra con reemplazo: devuelva la cuenta después de seleccionarla. Podemos decirle a sample que haga esto cambiando el argumento de reemplazo, que por defecto es FALSO, para reemplazar = VERDADERO.
+
+
+eventos <- sample(muestras, B, replace = TRUE)
+
+prop.table(table(eventos))
+
+#Sin sorpresas los resultados son similares con los obtenidos anteriormente.
 
 
