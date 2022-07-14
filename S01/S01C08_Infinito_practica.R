@@ -31,3 +31,4 @@ prob <- sapply(B, compute_prob)
 qplot(log10(B), prob, geom = "line")
 
 #En este gráfico, podemos ver que los valores comienzan a estabilizarse (es decir, varían menos de .01) alrededor de 1000. Tenga en cuenta que la probabilidad exacta, que conocemos en este caso, es 0.569.
+
