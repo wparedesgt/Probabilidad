@@ -287,3 +287,87 @@ sqrt(n) * 2 * sqrt(90)/19
 
 #Sin embargo, aquí nos enfocamos en el CLT, que generalmente se puede aplicar a sumas de variables aleatorias de una manera que la distribución binomial no puede.
 
+###Desviacion Estandar de la poblacion vrs la Desviacion Estardard de la Muestra 
+
+#La desviación estándar de una lista x (abajo usamos alturas como ejemplo) se define como la raíz cuadrada del promedio de las diferencias al cuadrado:
+
+library(dslabs)
+x <- heights$height
+m <- mean(x)
+s <- sqrt(mean((x-m)^2))
+
+#Sin embargo, tenga en cuenta que la función sd devuelve un resultado ligeramente diferente:
+
+identical(s, sd(x))
+#> [1] <FALSE
+s-sd(x)
+
+#Esto se debe a que la función sd R no devuelve la sd de la lista, sino que utiliza una fórmula que estima las desviaciones estándar de una población a partir de una muestra aleatoria X1,…,XN que, por razones no discutidas aquí, divide la suma de los cuadrados por el N−1.
+
+
+#Puede ver que este es el caso escribiendo:
+
+n <- length(x)
+s-sd(x)*sqrt((n-1) / n)
+
+#Para toda la teoría discutida aquí, debe calcular la desviación estándar real como se define:
+
+sqrt(mean((x-m)^2))
+
+#Así que tenga cuidado al usar la función sd en R. 
+
+#Sin embargo, tenga en cuenta que a lo largo del libro a veces usamos la función sd cuando realmente queremos la SD real. 
+
+#Esto se debe a que cuando el tamaño de la lista es grande, estos dos son prácticamente equivalentes ya que √(N−1)/N≈1.
+
+###Teorema del límite central CLT
+
+
+#El teorema del límite central (CLT) nos dice que cuando el número de sorteos, también llamado tamaño de la muestra, es grande, la distribución de probabilidad de la suma de los sorteos independientes es aproximadamente normal. 
+
+#Debido a que los modelos de muestreo se utilizan para tantos procesos de generación de datos, el CLT se considera una de las ideas matemáticas más importantes de la historia.
+
+#Anteriormente, discutimos que si sabemos que la distribución de una lista de números se aproxima a la distribución normal, todo lo que necesitamos para describir la lista es el promedio y la desviación estándar.
+
+#También sabemos que lo mismo se aplica a las distribuciones de probabilidad. Si una variable aleatoria tiene una distribución de probabilidad que se aproxima a la distribución normal, todo lo que necesitamos para describir la distribución de probabilidad es el promedio y la desviación estándar, denominados valor esperado y error estándar.
+
+#Anteriormente ejecutamos esta simulación de Monte Carlo:
+
+n <- 1000
+B <- 10000
+ganadores_ruleta <- function(n){
+  X <- sample(c(-1,1), n, replace = TRUE, prob=c(9/19, 10/19))
+  sum(X)
+}
+S <- replicate(B, ganadores_ruleta(n))
+
+#El Teorema del Límite Central (CLT) nos dice que la suma S se aproxima mediante una distribución normal.
+
+#Usando las fórmulas anteriores, sabemos que el valor esperado y el error estándar son:
+
+n * (20-18)/38 
+#> [1] 52.6
+sqrt(n) * 2 * sqrt(90)/19 
+#> [1] 31.6
+
+#Los valores teóricos anteriores coinciden con los obtenidos con la simulación Monte Carlo:
+
+mean(S)
+#> [1] 52.2
+sd(S)
+
+#Usando el CLT, podemos omitir la simulación de Monte Carlo y en su lugar calcular la probabilidad de que el casino pierda dinero usando esta aproximación:
+
+mu <- n * (20-18)/38
+se <-  sqrt(n) * 2 * sqrt(90)/19 
+pnorm(0, mu, se)
+#> [1] 0.0478
+
+ 
+#Que también está muy de acuerdo con nuestro resultado de Monte Carlo:
+
+mean(S < 0)
+
+####¿Qué tan grande es grande en el teorema del límite central?
+
+
