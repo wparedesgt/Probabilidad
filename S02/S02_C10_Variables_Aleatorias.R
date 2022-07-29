@@ -370,4 +370,24 @@ mean(S < 0)
 
 ####¿Qué tan grande es grande en el teorema del límite central?
 
+#El CLT funciona cuando el número de sorteos es grande. Pero grande es un término relativo. En muchas circunstancias, tan solo 30 sorteos son suficientes para que el CLT sea útil. En algunos casos específicos, tan solo 10 es suficiente. Sin embargo, estas no deben considerarse reglas generales. Tenga en cuenta, por ejemplo, que cuando la probabilidad de éxito es muy pequeña, necesitamos tamaños de muestra mucho más grandes.
+
+#A modo de ilustración, consideremos la lotería, no en la de feria de cartones sino en las nacionales que hacen en los paises. En la lotería, las posibilidades de ganar son menos de 1 en un millón. Miles de personas juegan por lo que el número de sorteos es muy grande. Sin embargo, el número de ganadores, la suma de los sorteos, oscila entre 0 y 4. Esta suma ciertamente no se aproxima bien mediante una distribución normal, por lo que la CLT no se aplica, incluso con un tamaño de muestra muy grande. Esto es generalmente cierto cuando la probabilidad de éxito es muy baja. En estos casos, la distribución de Poisson es más adecuada, tambien la veremos mas adelante, al principio no estaba tomada en cuenta pero es necesario que la estudiemos.
+
+#Puede examinar las propiedades de la distribución de Poisson utilizando dpois y ppois. Puede generar variables aleatorias siguiendo esta distribución con rpois. 
+
+
+
+###Ley de numeros grandes
+
+#Una implicación importante del resultado final es que el error estándar del promedio se vuelve cada vez más pequeño a medida que n crece. Cuando n es muy grande, entonces el error estándar es prácticamente 0 y el promedio de los sorteos converge al promedio de la urna. Esto se conoce en los libros de texto de estadística como la ley de los grandes números o la ley de los promedios.
+
+
+####Mal interpretando la ley de los promedios
+
+
+#La ley de los promedios a veces se malinterpreta. Por ejemplo, si lanza una moneda 5 veces y ve cara cada vez, es posible que escuche a alguien argumentar que el siguiente lanzamiento probablemente sea cruz debido a la ley de los promedios: en promedio, deberíamos ver 50 % de cara y 50 % de cruz. Un argumento similar sería decir que el rojo "vence" en la rueda de la ruleta después de ver aparecer el negro cinco veces seguidas. Estos eventos son independientes, por lo que la posibilidad de que una moneda caiga cara es del 50 %, independientemente de los 5 anteriores. Este también es el caso del resultado de la ruleta. La ley de los promedios se aplica solo cuando el número de sorteos es muy grande y no en muestras pequeñas. Después de un millón de lanzamientos, definitivamente verá alrededor del 50 % de caras, independientemente del resultado de los primeros cinco lanzamientos.
+
+#Otro uso indebido divertido de la ley de los promedios es en los deportes cuando los comentaristas deportivos de televisión predicen que un jugador está a punto de tener éxito porque ha fallado varias veces seguidas.
+
 
